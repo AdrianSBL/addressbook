@@ -28,8 +28,11 @@ stages {
         }
     stage('Build DOCKER image') {
         steps{ 
-                def customImage = docker.build("adriandevops/devaddressbook:${env.BUILD_ID}")
-                customImage.push()
+                node {
+                    def dockerfile = 'Dockerfile'
+                    def customImage = docker.build("adriandevops/devaddressbook:${env.BUILD_ID}", "-f ${dockerfile} ./home/abo/Project2-DJP-CICD/addressbook") 
+                    customImage.push()
+                }             
             }
         }
     
