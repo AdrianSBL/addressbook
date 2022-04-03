@@ -25,7 +25,7 @@ stages {
             steps {
                sh 'mvn package'               
 
-               sh 'cp /var/lib/jenkins/workspace/DJP-CICD/target/addressbook-2.0.war /var/lib/jenkins/workspace/DJP-CICD/addressbook-2.0.war'
+               sh 'cp /var/lib/jenkins/workspace/DJP-CICD/target/addressbook-2.0.war /home/abo/Project2-DJP-CICD/addressbook/addressbook-2.0.war'
             }
         }
     }
