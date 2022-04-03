@@ -1,6 +1,8 @@
 pipeline {
     
 agent { node { label 'master' } } 
+agent { dockerfile true }
+
 tools {
         maven 'maven3.6.3' 
         jdk 'java11'
