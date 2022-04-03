@@ -1,6 +1,6 @@
 pipeline {
     
-agent { node { label 'master' } } 
+/* agent { node { label 'master' } } */
 agent { dockerfile true }
 
 tools {
@@ -28,7 +28,14 @@ stages {
                sh 'mvn package'
             }
         }
+    stage('Build DOCKER image') {
+            /*sh 'sudo docker build -t adriandevops/devaddressbook:v1 /home/abo/Project2-DJP-CICD/addressbook'*/
+        node {
+            def customImage = docker.build("adriandevops/devaddressbook:${env.BUILD_ID}")
+            customImage.push()
+        }
 
-}
-
+        }
+    
+    }
 }
