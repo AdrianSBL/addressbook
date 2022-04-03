@@ -1,5 +1,5 @@
 pipeline {
-    agent { dockerfile true }
+agent { node { label 'master' } } 
 
 tools {
         maven 'maven3.6.3' 
@@ -26,15 +26,16 @@ stages {
                sh 'mvn package'
             }
         }
-    stage('Build DOCKER image') {
-        steps{ 
-                node {
-                    def dockerfile = 'Dockerfile'
-                    def customImage = docker.build("adriandevops/devaddressbook:${env.BUILD_ID}", "-f ${dockerfile} ./home/abo/Project2-DJP-CICD/addressbook") 
-                    customImage.push()
-                }             
+/*    stage('Build DOCKER image') {
+        steps { 
+          
             }
         }
-    
+    */
     }
 }
+node {
+    def dockerfile = 'Dockerfile'
+    def customImage = docker.build("adriandevops/devaddressbook:${env.BUILD_ID}", "-f ${dockerfile} ./home/abo/Project2-DJP-CICD/addressbook") 
+    customImage.push()
+}   
