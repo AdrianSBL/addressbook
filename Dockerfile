@@ -1,12 +1,2 @@
-FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
-
-WORKDIR /app
-ADD . /app/
-
-EXPOSE 3000
-
-RUN dotnet build
-
-WORKDIR /app/Core.Application/
-
-ENTRYPOINT ["dotnet", "run", "Core.Application.dll"]
+FROM tomcat:9.0.24-jdk8-adoptopenjdk-hotspot
+COPY /var/lib/jenkins/workspace/DJP-CICD/target/addressbook-2.0.war /usr/local/tomcat/webapps/
