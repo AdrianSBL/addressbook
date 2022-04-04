@@ -44,13 +44,9 @@ node {
             }                
     }
     stage('Remove all containers') {
-            steps {
-               sh 'docker rm -f $(docker ps -qa) adriandevops/devaddressbook:${env.BUILD_ID}'    
-            }
+            sh 'docker rm -f $(docker ps -qa)'
     }
     stage('Run the new Image') {
-            steps {
-               sh 'docker run -d -p 8090:80 '    
-            }
+            sh 'docker run -d -p 8090:80 adriandevops/devaddressbook:${env.BUILD_ID}'    
     }
 }   
