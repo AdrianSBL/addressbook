@@ -38,9 +38,19 @@ node {
             dImage = docker.build("adriandevops/devaddressbook:${env.BUILD_ID}", "-f ${dockerfile} /home/abo/Project2-DJP-CICD/addressbook") 
     }        
     
-    stage('Push Image') {
+    stage('Push the Image to Docker Hub') {
             docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {        
                     dImage.push("${env.BUILD_ID}")
             }                
+    }
+    stage('Remove all containers') {
+            steps {
+               sh 'docker rm -f $(docker ps -qa) adriandevops/devaddressbook:${env.BUILD_ID}'    
+            }
+    }
+    stage('Run the new Image') {
+            steps {
+               sh 'docker run -d -p 8090:80 '    
+            }
     }
 }   
