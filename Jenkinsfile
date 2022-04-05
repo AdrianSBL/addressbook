@@ -51,6 +51,6 @@ node {
             }
     }
     stage('Run the new Image') {
-            sh 'docker run -d -p 8090:80 adriandevops/devaddressbook:${env.BUILD_ID}'    
+            sh 'docker run -d -p 8090:8080 adriandevops/devaddressbook:${env.BUILD_ID}'    
     }
 }   
