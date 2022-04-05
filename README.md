@@ -1,3 +1,6 @@
+This branch is a working project for a Docker Jenkins Pipeline demo.
+The addressbook project behind is serving a support project.
+
 Addressbook Tutorial
 ====================
 
