@@ -43,8 +43,12 @@ node {
                     dImage.push("${env.BUILD_ID}")
             }                
     }
-    stage('Remove all containers') {
-            sh 'docker stop $(docker ps -q)' 
+    stage('Stop all containers') {
+            try {
+                sh 'docker stop $(docker ps -q)' 
+            } catch (err){
+                    echo err.getMessage()
+            }
     }
     stage('Run the new Image') {
             sh 'docker run -d -p 8090:80 adriandevops/devaddressbook:${env.BUILD_ID}'    
