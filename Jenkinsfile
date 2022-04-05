@@ -55,6 +55,12 @@ node {
             } catch (err){
                     echo err.getMessage()
             }            
+            
+            try {
+                sh 'docker rmi -f $(docker images -qa)            ' 
+            } catch (err){
+                    echo err.getMessage()
+            }            
     }
     stage('Run the new Image') {
             sh "docker run -d -p 8090:8080 adriandevops/devaddressbook:${env.BUILD_ID}"
