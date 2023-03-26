@@ -25,7 +25,8 @@ stages {
             steps {
                sh 'mvn package'               
 
-               sh 'cp /var/lib/jenkins/workspace/CapstoneProject/target/addressbook-2.0.war ~/CapstonePrj/addressbook/addressbook-2.0.war'
+               sh 'cp /var/lib/jenkins/workspace/CapstoneProject/target/addressbook-2.0.war /home/ubuntu/CapstonePrj/addressbook/addressbook-2.0.war'
+
             }
         }
     }
@@ -35,7 +36,7 @@ node {
     def dImage
     stage('Build image') {
             def dockerfile = 'Dockerfile'
-            dImage = docker.build("adriandevops/capstoneprj:${env.BUILD_ID}", "-f ${dockerfile} ~/CapstonePrj/addressbook") 
+            dImage = docker.build("adriandevops/capstoneprj:${env.BUILD_ID}", "-f ${dockerfile} /home/ubuntu/CapstonePrj/addressbook") 
     }        
     
     stage('Push the Image to Docker Hub') {
@@ -57,7 +58,7 @@ node {
             }            
             
             try {
-                sh 'docker rmi -f $(docker images -qa)            ' 
+                sh 'docker rmi -f $(docker images -qa) ' 
             } catch (err){
                     echo err.getMessage()
             }            
