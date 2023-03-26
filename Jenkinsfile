@@ -25,7 +25,7 @@ stages {
             steps {
                sh 'mvn package'               
 
-               sh 'cp /var/lib/jenkins/workspace/CapstoneProject/target/addressbook-2.0.war /home/ubuntu/CapstonePrj/addressbook/addressbook-2.0.war'
+               sh 'cp /var/lib/jenkins/workspace/CapstoneProject/target/addressbook-2.0.war /home/ubuntu/CapstonePrj/addressbook/'
 
             }
         }
