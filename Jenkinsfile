@@ -25,7 +25,7 @@ stages {
             steps {
                sh 'mvn package'               
 
-               sh 'cp /var/lib/jenkins/workspace/DJP-CICD/target/addressbook-2.0.war /home/abo/Project2-DJP-CICD/addressbook/addressbook-2.0.war'
+               sh 'cp /var/lib/jenkins/workspace/CapstoneProject/target/addressbook-2.0.war ~/CapstonePrj/addressbook/addressbook-2.0.war'
             }
         }
     }
@@ -35,7 +35,7 @@ node {
     def dImage
     stage('Build image') {
             def dockerfile = 'Dockerfile'
-            dImage = docker.build("adriandevops/devaddressbook:${env.BUILD_ID}", "-f ${dockerfile} /home/abo/Project2-DJP-CICD/addressbook") 
+            dImage = docker.build("adriandevops/capstoneprj:${env.BUILD_ID}", "-f ${dockerfile} ~/CapstonePrj/addressbook") 
     }        
     
     stage('Push the Image to Docker Hub') {
@@ -63,6 +63,6 @@ node {
             }            
     }
     stage('Run the new Image') {
-            sh "docker run -d -p 8090:8080 adriandevops/devaddressbook:${env.BUILD_ID}"
+            sh "docker run -d -p 8090:8080 adriandevops/capstoneprj:${env.BUILD_ID}"
     }
 }   
