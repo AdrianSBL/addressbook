@@ -24,7 +24,7 @@ stages {
     stage('Package') {
             steps {
                sh 'mvn package'               
-	       sh 'mkdir /var/lib/jenkins/workspace/CapstoneProject/target/war'	
+	       sh 'mkdir -p /var/lib/jenkins/workspace/CapstoneProject/target/war'	
                sh 'cp /var/lib/jenkins/workspace/CapstoneProject/target/addressbook-2.0.war /var/lib/jenkins/workspace/CapstoneProject/target/war'
 
             }
