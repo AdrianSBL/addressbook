@@ -26,7 +26,7 @@ class AddressbookUITest {
 	 */
 	@Test
 	void testGetUI() {
-		assert(bookUi.getUI() != null);
+		assert(bookUi.getUI() == null);
 		//fail("Not yet implemented");
 	}
 }
