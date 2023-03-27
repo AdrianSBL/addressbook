@@ -24,8 +24,8 @@ stages {
     stage('Package') {
             steps {
                sh 'mvn package'               
-
-               sh 'cp /var/lib/jenkins/workspace/CapstoneProject/target/addressbook-2.0.war /home/ubuntu/CapstonePrj/addressbook/'
+	       sh 'mkdir /var/lib/jenkins/workspace/CapstoneProject/target/war'	
+               sh 'cp /var/lib/jenkins/workspace/CapstoneProject/target/addressbook-2.0.war /var/lib/jenkins/workspace/CapstoneProject/target/war'
 
             }
         }
@@ -36,7 +36,7 @@ node {
     def dImage
     stage('Build image') {
             def dockerfile = 'Dockerfile'
-            dImage = docker.build("adriandevops/capstoneprj:${env.BUILD_ID}", "-f ${dockerfile} /home/ubuntu/CapstonePrj/addressbook") 
+            dImage = docker.build("adriandevops/capstoneprj:${env.BUILD_ID}", "-f ${dockerfile} /var/lib/jenkins/workspace/CapstoneProject/target/war") 
     }        
     
     stage('Push the Image to Docker Hub') {
